@@ -17,8 +17,16 @@ var request = https.request(options, function(response){
 		body += chunk.toString('utf8');
 	});
 	response.on("end" , function(){
+		var repos = [];
 		var json = JSON.parse(body);
-		console.log("Count:" , json.length);
+		json.forEach(function(repo){
+			repos.push({
+				name: repo.name,
+				description: repo.description
+			});
+		})
+		console.log("Repos:" ,repos);
+		//console.log("Count:" , json.length);
 	});
 
 });
