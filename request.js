@@ -40,6 +40,9 @@ getRepos("OllieParsley", function(repos){
 	console.log("OllieParsley has " +repos.length+ " repos");
 });
 
+getRepos("deepjyoti941", function(repos){
+	console.log("Deepjyoti has " +repos.length+ " repos");
+});
 
 
 
