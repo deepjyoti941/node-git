@@ -17,7 +17,8 @@ var request = https.request(options, function(response){
 		body += chunk.toString('utf8');
 	});
 	response.on("end" , function(){
-		console.log("Body:" , body);
+		var json = JSON.parse(body);
+		console.log("Count:" , json.length);
 	});
 
 });
