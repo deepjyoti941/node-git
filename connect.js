@@ -9,5 +9,21 @@ db.open(function(error){
 	//creating user collection i.e user table
 	db.collection("user" , function(error , collection){ 
 		console.log("we have the collection");
+
+		collection.insert({
+				id:"1",
+				name:"deepjyoti",
+				email:"deepjyoti941@gmail.com"
+			},function(){
+				console.log("successfully inserted deepjyoti's data");
+		});
+
+		collection.insert({
+				id:"2",
+				name:"khakhlary",
+				email:"khakhlary@gmail.com"
+			},function(){
+				console.log("successfully inserted khakhlary's data")
+		});
 	});
 });
