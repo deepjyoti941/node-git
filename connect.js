@@ -6,4 +6,8 @@ var db = new mongo.Db("nodejs-introduction" , new mongo.Server(host , port , {})
 db.open(function(error){
 	console.log("We are connected " +host+":"+port);
 
+	//creating user collection i.e user table
+	db.collection("user" , function(error , collection){ 
+		console.log("we have the collection");
+	});
 });
