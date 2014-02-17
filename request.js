@@ -1,34 +1,46 @@
 var https = require("https");
 
-var username = 'OllieParsley';
+function getRepos(username, callback) {
 
-var options = {
-	headers: {'user-agent': 'deepjyoti941'},
-	host: 'api.github.com',
-	path: '/users/'+username+'/repos',
-	method: 'GET'
-};
+	var options = {
+		headers: {'user-agent': 'deepjyoti941'},
+		host: 'api.github.com',
+		path: '/users/'+username+'/repos',
+		method: 'GET'
+	};
 
-var request = https.request(options, function(response){
-	
-	var body = '';
-	
-	response.on("data" , function(chunk){
-		body += chunk.toString('utf8');
+	var request = https.request(options, function(response){
+		
+		var body = '';
+		
+		response.on("data" , function(chunk){
+			body += chunk.toString('utf8');
+		});
+		response.on("end" , function(){
+			var repos = [];
+			var json = JSON.parse(body);
+			json.forEach(function(repo){
+				repos.push({
+					name: repo.name,
+					description: repo.description
+				});
+			})
+			//console.log("Repos:" ,repos);
+			//console.log("Count:" , json.length);
+			callback(repos);
+		});
+
 	});
-	response.on("end" , function(){
-		var repos = [];
-		var json = JSON.parse(body);
-		json.forEach(function(repo){
-			repos.push({
-				name: repo.name,
-				description: repo.description
-			});
-		})
-		console.log("Repos:" ,repos);
-		//console.log("Count:" , json.length);
-	});
 
+	request.end();
+
+}
+
+getRepos("OllieParsley", function(repos){
+	console.log("OllieParsley has " +repos.length+ " repos");
 });
 
-request.end();
+
+
+
+
